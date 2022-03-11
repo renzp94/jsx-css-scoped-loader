@@ -1,0 +1,35 @@
+{
+  "name": "@renzp/jsx-scoped-loader",
+  "version": "0.0.1",
+  "description": "实现jsx scoped的webpack loader",
+  "main": "lib/index.js",
+  "scripts": {
+    "dev": "tsup --watch src",
+    "build": "tsup",
+    "pub": "npm run build && npm publish --access=public"
+  },
+  "files": [
+    "lib/index.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/renzp94/jsx-css-scoped-loader.git"
+  },
+  "keywords": [
+    "webpack",
+    "loader",
+    "jsx scoped"
+  ],
+  "author": "renzp <1074720760.qq.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/renzp94/jsx-css-scoped-loader/issues"
+  },
+  "homepage": "https://github.com/renzp94/jsx-css-scoped-loader#readme",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "dependencies": {
+    "@swc/core": "^1.2.152"
+  }
+}

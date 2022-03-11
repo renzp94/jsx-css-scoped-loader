@@ -1,0 +1,7 @@
+.app{
+    color:#f00;
+}
+
+.app:hover{
+    color:green;
+}
