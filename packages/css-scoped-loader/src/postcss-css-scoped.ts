@@ -28,7 +28,7 @@ const plugin = (id: string) => {
               selector.insertAfter(
                 node,
                 selectorParser.attribute({
-                  attribute: `data-scope-${id}`,
+                  attribute: `data-scoped-${id}`,
                 } as AttributeOptions)
               )
             } else {

@@ -7,17 +7,7 @@ const defaultOptions: Options = {
     parser: {
       syntax: 'typescript',
       tsx: true,
-      decorators: false,
-      dynamicImport: false,
-    },
-    transform: {
-      react: {
-        pragma: 'React.createElement',
-        pragmaFrag: 'React.Fragment',
-        throwIfNamespace: true,
-        development: false,
-        useBuiltins: false,
-      },
+      dynamicImport: true,
     },
   },
 }

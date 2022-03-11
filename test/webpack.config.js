@@ -14,7 +14,7 @@ module.exports = {
         use: ['swc-loader', path.resolve(__dirname, '../packages/jsx-scoped-loader/lib/index.js')],
       },
       {
-        test: /\.scope\.css$/,
+        test: /\.scoped\.css$/,
         exclude: /node_modules/,
         use: [
           'style-loader',

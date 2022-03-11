@@ -1,5 +1,5 @@
 import React from 'react'
-import '../about.scope.css'
+import '../about.scoped.css'
 
 export default function Home() {
   return <div className="app">about</div>
