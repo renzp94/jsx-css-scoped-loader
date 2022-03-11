@@ -12,22 +12,28 @@ const plugin = (id: string) => {
 
         node.selector = selectorParser((selectors) => {
           selectors.each((selector: Selector) => {
-            let node: any = null
-            selector.each((n: any) => {
+            let node = null
+            selector.each((n) => {
               if (n.type === 'pseudo' && n.value === '::global') {
                 n.value = n.spaces.before = n.spaces.after = ''
                 return false
               }
+
               if (n.type !== 'pseudo' && n.type !== 'combinator') {
                 node = n
               }
             })
-            selector.insertAfter(
-              node,
-              selectorParser.attribute({
-                attribute: `data-scope-${id}`,
-              } as AttributeOptions)
-            )
+            if (node) {
+              node.spaces.after = ''
+              selector.insertAfter(
+                node,
+                selectorParser.attribute({
+                  attribute: `data-scope-${id}`,
+                } as AttributeOptions)
+              )
+            } else {
+              selector.first.spaces.before = ''
+            }
           })
         }).processSync(node.selector)
       })

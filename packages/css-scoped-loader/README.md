@@ -25,3 +25,29 @@ module: {
   ],
 },
 ```
+
+## 样式穿透
+
+如果需要样式穿透，可以使用`::global`
+
+`原始代码`
+
+```css
+.app {
+  color: #000;
+}
+::global .app {
+  font-size: 20px;
+}
+```
+
+`转换之后代码`
+
+```css
+.app[data-scope-4ef1f8c9] {
+  color: #000;
+}
+.app {
+  font-size: 20px;
+}
+```
