@@ -50,7 +50,7 @@ export const BabelPluginScoped = (babel) => {
 
 export const babelLoader = (source: string, resourcePath: string) => {
   return transformSync(source, {
-    filename: '*.tsx',
+    filename: resourcePath,
     presets: [require.resolve('@babel/preset-typescript'), require.resolve('@babel/preset-react')],
     plugins: [[BabelPluginScoped, { resourcePath }]],
   })
