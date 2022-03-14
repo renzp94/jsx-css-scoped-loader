@@ -11,7 +11,12 @@ module.exports = {
       {
         test: /\.tsx$/,
         exclude: /node_modules/,
-        use: ['swc-loader', path.resolve(__dirname, '../packages/jsx-scoped-loader/lib/index.js')],
+        use: [
+          'swc-loader',
+          {
+            loader: path.resolve(__dirname, '../packages/jsx-scoped-loader/lib/index.js'),
+          },
+        ],
       },
       {
         test: /\.scoped\.css$/,

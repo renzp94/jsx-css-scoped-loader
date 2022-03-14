@@ -4,14 +4,16 @@ import type {
   JSXAttributeOrSpread,
   JSXAttribute,
   ModuleDeclaration,
+  Options,
+  Module,
 } from '@swc/core'
 import { Visitor } from '@swc/core/Visitor'
 import path from 'path'
 import fs from 'fs'
 import hash from 'hash-sum'
 import { getFileFullPath } from './utils'
-
-export default class JsxScopedVisitor extends Visitor {
+import { transformSync } from '@swc/core'
+export class JsxScopedVisitor extends Visitor {
   resourcePath: string
   hash: string
   constructor(resourcePath: string) {
@@ -93,4 +95,21 @@ export default class JsxScopedVisitor extends Visitor {
 
     return attributes
   }
+}
+
+const defaultOptions: Options = {
+  jsc: {
+    parser: {
+      syntax: 'typescript',
+      tsx: true,
+      dynamicImport: true,
+    },
+  },
+}
+
+export const swcLoader = (source: string, resourcePath: string) => {
+  return transformSync(source, {
+    plugin: (m) => new JsxScopedVisitor(resourcePath).visitModule(m as Module),
+    ...defaultOptions,
+  })
 }

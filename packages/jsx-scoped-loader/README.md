@@ -21,3 +21,7 @@ module: {
   ],
 },
 ```
+
+## Options
+
+- loader: 'babel' | 'swc'，默认为'babel'

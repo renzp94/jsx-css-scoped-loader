@@ -1,21 +1,12 @@
-import type { Module, Options } from '@swc/core'
-import { transformSync } from '@swc/core'
-import JsxScopedVisitor from './jsx-scoped-visitor'
-
-const defaultOptions: Options = {
-  jsc: {
-    parser: {
-      syntax: 'typescript',
-      tsx: true,
-      dynamicImport: true,
-    },
-  },
-}
+import { babelLoader } from './babel-plugin-scoped'
+import { swcLoader } from './swc-scoped-visitor'
 
 export default function jsxLoader(source) {
-  const { code } = transformSync(source, {
-    plugin: (m) => new JsxScopedVisitor(this.resourcePath).visitModule(m as Module),
-    ...defaultOptions,
-  })
+  const { loader = 'babel' } = this.getOptions()
+  const loaders = {
+    babel: babelLoader,
+    swc: swcLoader,
+  }
+  const { code } = loaders[loader](source, this.resourcePath)
   return code
 }
