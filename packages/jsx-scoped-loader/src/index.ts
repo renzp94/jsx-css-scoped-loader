@@ -1,12 +1,9 @@
-import { babelLoader } from './babel-plugin-scoped'
-import { swcLoader } from './swc-scoped-visitor'
+import babel from './babel-loader'
+import swc from './swc-loader'
 
 export default function jsxLoader(source) {
   const { loader = 'babel' } = this.getOptions()
-  const loaders = {
-    babel: babelLoader,
-    swc: swcLoader,
-  }
+  const loaders = { babel, swc }
   const { code } = loaders[loader](source, this.resourcePath)
   return code
 }

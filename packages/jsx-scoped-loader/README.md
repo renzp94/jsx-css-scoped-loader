@@ -1,4 +1,4 @@
-# jsx-scoped-loader
+# @renzp/jsx-scoped-loader
 
 为`jsx`文件中添加`scoped`的`loader`
 

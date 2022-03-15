@@ -33,6 +33,9 @@ importers:
       tsup: 5.11.13_typescript@4.5.5
       typescript: 4.5.5
 
+  packages/babel-plugin-jsx-scoped:
+    specifiers: {}
+
   packages/css-scoped-loader:
     specifiers:
       postcss: ^8.4.8
@@ -46,11 +49,13 @@ importers:
       '@babel/core': ^7.17.5
       '@babel/preset-react': ^7.16.7
       '@babel/preset-typescript': ^7.16.7
+      '@renzp/babel-plugin-jsx-scoped': ^0.0.1
       '@swc/core': ^1.2.152
     dependencies:
       '@babel/core': 7.17.5
       '@babel/preset-react': 7.16.7_@babel+core@7.17.5
       '@babel/preset-typescript': 7.16.7_@babel+core@7.17.5
+      '@renzp/babel-plugin-jsx-scoped': link:../babel-plugin-jsx-scoped
       '@swc/core': 1.2.152
 
 packages:
@@ -136,7 +141,7 @@ packages:
       '@babel/helper-annotate-as-pure': 7.16.7
       '@babel/helper-environment-visitor': 7.16.7
       '@babel/helper-function-name': 7.16.7
-      '@babel/helper-member-expression-to-functions': 7.16.7
+      '@babel/helper-member-expression-to-functions': 7.17.7
       '@babel/helper-optimise-call-expression': 7.16.7
       '@babel/helper-replace-supers': 7.16.7
       '@babel/helper-split-export-declaration': 7.16.7
@@ -174,8 +179,8 @@ packages:
       '@babel/types': 7.17.0
     dev: false
 
-  /@babel/helper-member-expression-to-functions/7.16.7:
-    resolution: {integrity: sha512-VtJ/65tYiU/6AbMTDwyoXGPKHgTsfRarivm+YbB5uAzKUyuPjgZSgAFeG87FCigc7KNHu2Pegh1XIT3lXjvz3Q==}
+  /@babel/helper-member-expression-to-functions/7.17.7:
+    resolution: {integrity: sha512-thxXgnQ8qQ11W2wVUObIqDL4p148VMxkt5T/qpN5k2fboRyzFGFmKsTGViquyM5QHKUy48OZoca8kw4ajaDPyw==}
     engines: {node: '>=6.9.0'}
     dependencies:
       '@babel/types': 7.17.0
@@ -221,7 +226,7 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       '@babel/helper-environment-visitor': 7.16.7
-      '@babel/helper-member-expression-to-functions': 7.16.7
+      '@babel/helper-member-expression-to-functions': 7.17.7
       '@babel/helper-optimise-call-expression': 7.16.7
       '@babel/traverse': 7.17.3
       '@babel/types': 7.17.0

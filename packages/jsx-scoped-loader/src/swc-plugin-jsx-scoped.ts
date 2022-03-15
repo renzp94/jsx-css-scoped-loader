@@ -4,16 +4,37 @@ import type {
   JSXAttributeOrSpread,
   JSXAttribute,
   ModuleDeclaration,
-  Options,
-  Module,
 } from '@swc/core'
 import { Visitor } from '@swc/core/Visitor'
 import path from 'path'
 import fs from 'fs'
 import hash from 'hash-sum'
-import { getFileFullPath } from './utils'
-import { transformSync } from '@swc/core'
-export class JsxScopedVisitor extends Visitor {
+
+/**
+ * 获取文件的全路径
+ * @param dir 查询的目录
+ * @param filename 查询的文件
+ * @returns 找到则返回文件全路径，未找到则返回undefined
+ */
+const getFileFullPath = (fullDir: string, filename: string) => {
+  const filter = (method) => (item: string) => fs.statSync(`${fullDir}/${item}`)[method]()
+  const list = fs.readdirSync(fullDir)
+  const files = list.filter(filter('isFile'))
+  const dirs = list.filter(filter('isDirectory'))
+
+  const isExist = files.includes(filename)
+  if (isExist) {
+    return `${fullDir}/${filename}`
+  }
+  if (dirs.length === 0) {
+    return undefined
+  }
+  const dirTarget = dirs.find((dir: string) => getFileFullPath(`${fullDir}/${dir}`, filename))
+
+  return dirTarget ? `${fullDir}/${dirTarget}/${filename}` : undefined
+}
+
+export default class JsxScopedVisitor extends Visitor {
   resourcePath: string
   hash: string
   constructor(resourcePath: string) {
@@ -95,21 +116,4 @@ export class JsxScopedVisitor extends Visitor {
 
     return attributes
   }
-}
-
-const defaultOptions: Options = {
-  jsc: {
-    parser: {
-      syntax: 'typescript',
-      tsx: true,
-      dynamicImport: true,
-    },
-  },
-}
-
-export const swcLoader = (source: string, resourcePath: string) => {
-  return transformSync(source, {
-    plugin: (m) => new JsxScopedVisitor(resourcePath).visitModule(m as Module),
-    ...defaultOptions,
-  })
 }

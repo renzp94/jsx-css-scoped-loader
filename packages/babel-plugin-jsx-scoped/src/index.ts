@@ -1,11 +1,34 @@
 import fs from 'fs'
 import hash from 'hash-sum'
-import { transformSync } from '@babel/core'
-import { getFileFullPath } from './utils'
 
-export const BabelPluginScoped = (babel) => {
+/**
+ * 获取文件的全路径
+ * @param dir 查询的目录
+ * @param filename 查询的文件
+ * @returns 找到则返回文件全路径，未找到则返回undefined
+ */
+export const getFileFullPath = (fullDir: string, filename: string) => {
+  const filter = (method) => (item: string) => fs.statSync(`${fullDir}/${item}`)[method]()
+  const list = fs.readdirSync(fullDir)
+  const files = list.filter(filter('isFile'))
+  const dirs = list.filter(filter('isDirectory'))
+
+  const isExist = files.includes(filename)
+  if (isExist) {
+    return `${fullDir}/${filename}`
+  }
+  if (dirs.length === 0) {
+    return undefined
+  }
+  const dirTarget = dirs.find((dir: string) => getFileFullPath(`${fullDir}/${dir}`, filename))
+
+  return dirTarget ? `${fullDir}/${dirTarget}/${filename}` : undefined
+}
+
+const plugin = (babel) => {
   const t = babel.types
   let hashId
+
   return {
     visitor: {
       ImportDeclaration(path, state) {
@@ -15,8 +38,7 @@ export const BabelPluginScoped = (babel) => {
         if (!regex.test(cssFilename)) {
           return
         }
-        const resourcePath = state.opts.resourcePath
-        const filepaths = resourcePath.split('/')
+        const filepaths = state.filename.split('/')
         filepaths.pop()
         const filepath = filepaths.join('/')
         const cssFullPath = `${filepath}/${cssFilename}`
@@ -29,7 +51,7 @@ export const BabelPluginScoped = (babel) => {
           if (fullPath) {
             hashId = hash(fullPath)
           } else {
-            console.log(`未找到${resourcePath}文件中导入的${cssFilename}文件，无法生成css scope`)
+            console.log(`未找到${state.filename}文件中导入的${cssFilename}文件，无法生成css scope`)
           }
         }
       },
@@ -48,10 +70,4 @@ export const BabelPluginScoped = (babel) => {
   }
 }
 
-export const babelLoader = (source: string, resourcePath: string) => {
-  return transformSync(source, {
-    filename: resourcePath,
-    presets: [require.resolve('@babel/preset-typescript'), require.resolve('@babel/preset-react')],
-    plugins: [[BabelPluginScoped, { resourcePath }]],
-  })
-}
+export default plugin

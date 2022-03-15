@@ -15,6 +15,7 @@ module.exports = {
           'swc-loader',
           {
             loader: path.resolve(__dirname, '../packages/jsx-scoped-loader/lib/index.js'),
+            options: { loader: 'babel' },
           },
         ],
       },
