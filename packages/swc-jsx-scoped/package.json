@@ -1,7 +1,7 @@
 {
-  "name": "@renzp/jsx-scoped-loader",
-  "version": "0.0.6",
-  "description": "实现jsx scoped的webpack loader",
+  "name": "@renzp/swc-jsx-scoped",
+  "version": "0.0.1",
+  "description": "实现jsx scoped的swc plugin",
   "main": "lib/index.js",
   "scripts": {
     "dev": "tsup --watch src",
@@ -16,8 +16,8 @@
     "url": "git+https://github.com/renzp94/jsx-css-scoped-loader.git"
   },
   "keywords": [
-    "webpack",
-    "loader",
+    "swc",
+    "plugin",
     "jsx scoped"
   ],
   "author": "renzp <1074720760.qq.com>",
@@ -30,11 +30,6 @@
     "registry": "https://registry.npmjs.org"
   },
   "dependencies": {
-    "@babel/core": "^7.17.5",
-    "@babel/preset-react": "^7.16.7",
-    "@babel/preset-typescript": "^7.16.7",
-    "@renzp/babel-plugin-jsx-scoped": "^0.0.1",
-    "@renzp/swc-jsx-scoped": "^0.0.5",
     "@swc/core": "^1.2.152"
   }
 }

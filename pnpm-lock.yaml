@@ -50,6 +50,7 @@ importers:
       '@babel/preset-react': ^7.16.7
       '@babel/preset-typescript': ^7.16.7
       '@renzp/babel-plugin-jsx-scoped': ^0.0.1
+      '@renzp/swc-jsx-scoped': ^0.0.5
       '@swc/core': ^1.2.152
     dependencies:
       '@babel/core': 7.17.5
@@ -63,6 +64,12 @@ importers:
       postcss-selector-parser: ^6.0.9
     dependencies:
       postcss-selector-parser: 6.0.9
+
+  packages/swc-jsx-scoped:
+    specifiers:
+      '@swc/core': ^1.2.152
+    dependencies:
+      '@swc/core': 1.2.152
 
 packages:
 
