@@ -1,7 +1,8 @@
 import type { AttributeOptions, Selector } from 'postcss-selector-parser'
 import selectorParser from 'postcss-selector-parser'
+import hash from 'hash-sum'
 
-const plugin = (id: string) => {
+const plugin = (resourcePath: string) => {
   return {
     postcssPlugin: 'postcss-css-scoped',
     Once(root) {
@@ -24,6 +25,7 @@ const plugin = (id: string) => {
               }
             })
             if (node) {
+              const id = hash(resourcePath)
               node.spaces.after = ''
               selector.insertAfter(
                 node,
