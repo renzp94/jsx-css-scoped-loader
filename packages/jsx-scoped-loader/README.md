@@ -2,7 +2,7 @@
 
 为`jsx`文件中添加`scoped`的`loader`
 
-> 注意：需要搭配`@renzp/css-scoped-loader`一起使用
+> 注意：需要搭配`@renzp/css-scoped-loader`或`@renzp/postcss-css-scoped`一起使用
 
 ## Usage
 
