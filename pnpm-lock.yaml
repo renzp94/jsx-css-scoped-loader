@@ -38,11 +38,11 @@ importers:
 
   packages/css-scoped-loader:
     specifiers:
+      '@renzp/postcss-css-scoped': ^0.0.1
       postcss: ^8.4.8
-      postcss-selector-parser: ^6.0.9
     dependencies:
+      '@renzp/postcss-css-scoped': link:../postcss-css-scoped
       postcss: 8.4.8
-      postcss-selector-parser: 6.0.9
 
   packages/jsx-scoped-loader:
     specifiers:
@@ -57,6 +57,12 @@ importers:
       '@babel/preset-typescript': 7.16.7_@babel+core@7.17.5
       '@renzp/babel-plugin-jsx-scoped': link:../babel-plugin-jsx-scoped
       '@swc/core': 1.2.152
+
+  packages/postcss-css-scoped:
+    specifiers:
+      postcss-selector-parser: ^6.0.9
+    dependencies:
+      postcss-selector-parser: 6.0.9
 
 packages:
 
