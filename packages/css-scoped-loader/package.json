@@ -30,7 +30,7 @@
     "registry": "https://registry.npmjs.org"
   },
   "dependencies": {
-    "@renzp/postcss-css-scoped": "^0.0.2",
+    "@renzp/postcss-css-scoped": "workspace:*",
     "postcss": "^8.4.8"
   }
 }
