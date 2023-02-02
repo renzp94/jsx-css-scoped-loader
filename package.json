@@ -1,4 +1,13 @@
 {
+	"private": true,
+	"scripts": {
+    "predev": "pnpm -r --parallel --filter=./packages/*-scoped run dev",
+    "dev": "pnpm predev & pnpm -r --parallel --filter=!./packages/*-scoped --filter=!./playground run dev",
+    "prebuild": "pnpm -r --parallel --filter=./packages/*-scoped run build",
+    "build": "pnpm prebuild && pnpm --parallel --filter=./packages/*-scoped --filter=!./playground build",
+    "play:dev": "pnpm --parallel --filter=./playground dev",
+		"pub":"read -p '请输入发布包的目录名: ' package && cd ./packages/$package && pnpm pub"
+	},
 	"devDependencies": {
 		"@types/node": "^17.0.17",
 		"@typescript-eslint/eslint-plugin": "^5.11.0",
