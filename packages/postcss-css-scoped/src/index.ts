@@ -13,7 +13,7 @@ const plugin = (resourcePath: string) => {
 
         node.selector = selectorParser((selectors) => {
           selectors.each((selector: Selector) => {
-            let node = null
+            let node: any = null
             selector.each((n) => {
               if (n.type === 'pseudo' && n.value === '::global') {
                 n.value = n.spaces.before = n.spaces.after = ''

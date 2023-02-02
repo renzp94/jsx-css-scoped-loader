@@ -57,6 +57,8 @@ export default class JsxScopedVisitor extends Visitor {
       case 'ExportAllDeclaration':
         return this.visitExportAllDeclaration(n)
     }
+
+    return n
   }
   /**
    * 设置hash
@@ -64,28 +66,27 @@ export default class JsxScopedVisitor extends Visitor {
   setHash(n: StringLiteral) {
     const cssFilename = n.value?.split('/')?.pop()
     const regex = /\.scoped.(css|less|scss|sass)$/
-    if (!regex.test(cssFilename)) {
-      return
-    }
-    const filepaths = this.resourcePath.split('/')
-    filepaths.pop()
-    const filepath = filepaths.join('/')
-    const cssFullPath = path.resolve(filepath, cssFilename)
-    const cssExist = fs.existsSync(cssFullPath)
-    if (cssExist) {
-      this.hash = hash(cssFullPath)
-    } else {
-      const rootDir = `${process.cwd()}/src`
-      const fullPath = getFileFullPath(rootDir, cssFilename)
-      if (fullPath) {
-        this.hash = hash(fullPath)
+    if (cssFilename && !regex.test(cssFilename)) {
+      const filepaths = this.resourcePath.split('/')
+      filepaths.pop()
+      const filepath = filepaths.join('/')
+      const cssFullPath = path.resolve(filepath, cssFilename)
+      const cssExist = fs.existsSync(cssFullPath)
+      if (cssExist) {
+        this.hash = hash(cssFullPath)
       } else {
-        console.log(`未找到${this.resourcePath}文件中导入的${cssFilename}文件，无法生成css scope`)
+        const rootDir = `${process.cwd()}/src`
+        const fullPath = getFileFullPath(rootDir, cssFilename)
+        if (fullPath) {
+          this.hash = hash(fullPath)
+        } else {
+          console.log(`未找到${this.resourcePath}文件中导入的${cssFilename}文件，无法生成css scope`)
+        }
       }
     }
   }
   visitJSXOpeningElement(n: JSXOpeningElement): JSXOpeningElement {
-    n.attributes = this.setScopeAttribute(n.attributes)
+    n.attributes = this.setScopeAttribute(n.attributes) as JSXAttributeOrSpread[]
     return n
   }
   /**
@@ -95,7 +96,7 @@ export default class JsxScopedVisitor extends Visitor {
     attributes: JSXAttributeOrSpread[] | undefined
   ): JSXAttributeOrSpread[] | undefined {
     if (attributes && this.hash) {
-      let lastAttr: JSXAttribute
+      let lastAttr: JSXAttribute | null = null
       if (attributes.length > 0) {
         lastAttr = attributes[attributes.length - 1] as JSXAttribute
       }
@@ -110,7 +111,7 @@ export default class JsxScopedVisitor extends Visitor {
           value: `data-scoped-${this.hash}`,
           optional: false,
         },
-        value: null,
+        value: undefined,
       })
     }
 
