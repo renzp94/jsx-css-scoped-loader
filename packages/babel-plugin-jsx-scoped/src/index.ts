@@ -58,9 +58,8 @@ const plugin = (babel) => {
       JSXOpeningElement(path) {
         const { name, selfClosing } = path.node ?? {}
         const attrs = path.node.attributes
-        const attr = attrs.find((attr) => attr?.name?.name === 'className')
         const scopedName = t.jsxIdentifier(`data-scoped-${hashId}`)
-        if (attr && hashId) {
+        if (hashId) {
           const scopedAttr = t.jSXAttribute(scopedName, null)
           attrs.push(scopedAttr)
           t.jsxOpeningElement(name, attrs, selfClosing)
