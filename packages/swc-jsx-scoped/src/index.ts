@@ -66,7 +66,7 @@ export default class JsxScopedVisitor extends Visitor {
   setHash(n: StringLiteral) {
     const cssFilename = n.value?.split('/')?.pop()
     const regex = /\.scoped.(css|less|scss|sass)$/
-    if (cssFilename && !regex.test(cssFilename)) {
+    if (cssFilename && regex.test(cssFilename)) {
       const filepaths = this.resourcePath.split('/')
       filepaths.pop()
       const filepath = filepaths.join('/')
