@@ -1,6 +1,6 @@
 {
   "name": "@renzp/jsx-scoped-loader",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "description": "实现jsx scoped的webpack loader",
   "main": "lib/index.js",
   "scripts": {
@@ -34,7 +34,7 @@
     "@babel/preset-react": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7",
     "@renzp/babel-plugin-jsx-scoped": "^0.0.5",
-    "@renzp/swc-jsx-scoped": "^0.0.3",
-    "@swc/core": "^1.2.152"
+    "@renzp/swc-jsx-scoped": "^0.0.4",
+    "@swc/core": "1.3.6"
   }
 }

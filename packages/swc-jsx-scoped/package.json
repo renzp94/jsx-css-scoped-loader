@@ -1,6 +1,6 @@
 {
   "name": "@renzp/swc-jsx-scoped",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "实现jsx scoped的swc plugin",
   "main": "lib/index.js",
   "scripts": {
@@ -30,6 +30,6 @@
     "registry": "https://registry.npmjs.org"
   },
   "dependencies": {
-    "@swc/core": "^1.3.32"
+    "@swc/core": "1.3.6"
   }
 }

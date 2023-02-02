@@ -23,7 +23,7 @@
     "webpack-dev-server": "^4.7.4"
   },
   "dependencies": {
-    "@renzp/jsx-scoped-loader": "workspace:^0.0.16",
+    "@renzp/jsx-scoped-loader": "workspace:*",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "typescript": "^4.6.2"
