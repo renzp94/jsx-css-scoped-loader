@@ -76,7 +76,7 @@ export default class JsxScopedVisitor extends Visitor {
         this.hash = hash(cssFullPath)
       } else {
         const rootDir = `${process.cwd()}/src`
-        const fullPath = getFileFullPath(rootDir, cssFilename)
+        const fullPath = getFileFullPath(rootDir, cssFilename).replace(/\\/g, '/')
         if (fullPath) {
           this.hash = hash(fullPath)
         } else {

@@ -47,7 +47,7 @@ const plugin = (babel) => {
           hashId = hash(cssFullPath)
         } else {
           const rootDir = `${process.cwd()}/src`
-          const fullPath = getFileFullPath(rootDir, cssFilename)
+          const fullPath = getFileFullPath(rootDir, cssFilename).replace(/\\/g, '/')
           if (fullPath) {
             hashId = hash(fullPath)
           } else {

@@ -25,7 +25,8 @@ const plugin = (resourcePath: string) => {
               }
             })
             if (node) {
-              const id = hash(resourcePath)
+              const path = resourcePath.replace(/\\/g, '/')
+              const id = hash(path)
               node.spaces.after = ''
               selector.insertAfter(
                 node,
