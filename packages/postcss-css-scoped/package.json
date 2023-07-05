@@ -1,6 +1,6 @@
 {
   "name": "@renzp/postcss-css-scoped",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "实现css scoped的postcss plugin",
   "main": "lib/index.js",
   "scripts": {
