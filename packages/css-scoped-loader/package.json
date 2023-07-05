@@ -1,6 +1,6 @@
 {
   "name": "@renzp/css-scoped-loader",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "实现css scoped的webpack loader",
   "main": "lib/index.js",
   "scripts": {
