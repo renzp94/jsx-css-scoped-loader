@@ -1,12 +1,12 @@
 {
 	"private": true,
 	"scripts": {
-    "predev": "pnpm -r --parallel --filter=./packages/*-scoped run dev",
-    "dev": "pnpm predev & pnpm -r --parallel --filter=!./packages/*-scoped --filter=!./playground run dev",
-    "prebuild": "pnpm -r --parallel --filter=./packages/*-scoped run build",
-    "build": "pnpm prebuild && pnpm --parallel --filter=./packages/*-scoped --filter=!./playground build",
-    "play:dev": "pnpm --parallel --filter=./playground dev",
-		"pub":"read -p '请输入发布包的目录名: ' package && cd ./packages/$package && pnpm pub"
+		"predev": "pnpm -r --parallel --filter=./packages/*-scoped run dev",
+		"dev": "pnpm predev & pnpm -r --parallel --filter=!./packages/*-scoped --filter=!./playground run dev",
+		"prebuild": "pnpm -r --parallel --filter=./packages/*-scoped run build",
+		"build": "pnpm prebuild && pnpm --parallel --filter=./packages/*-scoped --filter=!./playground build",
+		"play:dev": "pnpm --parallel --filter=./playground dev",
+    "pub": "zx ./scripts/publish.mjs"
 	},
 	"devDependencies": {
 		"@types/node": "^17.0.17",
@@ -20,7 +20,8 @@
 		"lint-staged": "^12.3.3",
 		"prettier": "^2.5.1",
 		"tsup": "^5.11.13",
-		"typescript": "^4.5.5"
+		"typescript": "^4.5.5",
+		"zx": "^7.2.2"
 	},
 	"dependencies": {
 		"hash-sum": "^2.0.0"
