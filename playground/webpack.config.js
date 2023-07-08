@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const path = require('path')
 
 /** @type {import('webpack').Configuration} */
 module.exports = {
@@ -22,11 +21,7 @@ module.exports = {
       {
         test: /\.scoped\.css$/,
         exclude: /node_modules/,
-        use: [
-          'style-loader',
-          'css-loader',
-          path.resolve(__dirname, '../packages/css-scoped-loader/lib/index.js'),
-        ],
+        use: ['style-loader', 'css-loader', '@renzp/css-scoped-loader'],
       },
     ],
   },
