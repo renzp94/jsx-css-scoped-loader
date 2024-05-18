@@ -1,4 +1,4 @@
-import fs from 'fs'
+import fs from 'node:fs'
 import hash from 'hash-sum'
 
 /**
@@ -8,7 +8,8 @@ import hash from 'hash-sum'
  * @returns 找到则返回文件全路径，未找到则返回undefined
  */
 export const getFileFullPath = (fullDir: string, filename: string) => {
-  const filter = (method) => (item: string) => fs.statSync(`${fullDir}/${item}`)[method]()
+  const filter = (method) => (item: string) =>
+    fs.statSync(`${fullDir}/${item}`)[method]()
   const list = fs.readdirSync(fullDir)
   const files = list.filter(filter('isFile'))
   const dirs = list.filter(filter('isDirectory'))
@@ -20,14 +21,16 @@ export const getFileFullPath = (fullDir: string, filename: string) => {
   if (dirs.length === 0) {
     return undefined
   }
-  const dirTarget = dirs.find((dir: string) => getFileFullPath(`${fullDir}/${dir}`, filename))
+  const dirTarget = dirs.find((dir: string) =>
+    getFileFullPath(`${fullDir}/${dir}`, filename),
+  )
 
   return dirTarget ? `${fullDir}/${dirTarget}/${filename}` : undefined
 }
 
 const plugin = (babel) => {
   const t = babel.types
-  let hashId
+  let hashId: string
 
   return {
     visitor: {
@@ -47,11 +50,17 @@ const plugin = (babel) => {
           hashId = hash(cssFullPath)
         } else {
           const rootDir = `${process.cwd()}/src`
-          const fullPath = getFileFullPath(rootDir, cssFilename).replace(/\\/g, '/')
+          const fullPath = getFileFullPath(rootDir, cssFilename).replace(
+            /\\/g,
+            '/',
+          )
           if (fullPath) {
             hashId = hash(fullPath)
           } else {
-            console.log(`未找到${state.filename}文件中导入的${cssFilename}文件，无法生成css scope`)
+            // biome-ignore lint/suspicious/noConsoleLog: <explanation>
+            console.log(
+              `未找到${state.filename}文件中导入的${cssFilename}文件，无法生成css scope`,
+            )
           }
         }
       },

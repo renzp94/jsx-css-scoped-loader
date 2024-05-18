@@ -1,5 +1,5 @@
-import type { Options, Module } from '@swc/core'
 import JsxScopedVisitor from '@renzp/swc-jsx-scoped'
+import type { Module, Options } from '@swc/core'
 import { transformSync } from '@swc/core'
 
 const defaultOptions: Options = {

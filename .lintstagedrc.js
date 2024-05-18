@@ -1,3 +1,3 @@
 module.exports = {
-  'packages/*/src/**/*.{js,ts}': ['eslint', 'prettier --write']
+  'packages/*/src/**/*.{js,ts}': ['biome check', 'biome format --write'],
 }

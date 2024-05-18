@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 /** @type {import('webpack').Configuration} */

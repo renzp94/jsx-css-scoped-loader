@@ -1,13 +1,13 @@
+import fs from 'node:fs'
+import path from 'node:path'
 import type {
-  StringLiteral,
-  JSXOpeningElement,
-  JSXAttributeOrSpread,
   JSXAttribute,
+  JSXAttributeOrSpread,
+  JSXOpeningElement,
   ModuleDeclaration,
+  StringLiteral,
 } from '@swc/core'
 import { Visitor } from '@swc/core/Visitor'
-import path from 'path'
-import fs from 'fs'
 import hash from 'hash-sum'
 
 /**
@@ -17,7 +17,8 @@ import hash from 'hash-sum'
  * @returns 找到则返回文件全路径，未找到则返回undefined
  */
 const getFileFullPath = (fullDir: string, filename: string) => {
-  const filter = (method) => (item: string) => fs.statSync(`${fullDir}/${item}`)[method]()
+  const filter = (method) => (item: string) =>
+    fs.statSync(`${fullDir}/${item}`)[method]()
   const list = fs.readdirSync(fullDir)
   const files = list.filter(filter('isFile'))
   const dirs = list.filter(filter('isDirectory'))
@@ -29,7 +30,9 @@ const getFileFullPath = (fullDir: string, filename: string) => {
   if (dirs.length === 0) {
     return undefined
   }
-  const dirTarget = dirs.find((dir: string) => getFileFullPath(`${fullDir}/${dir}`, filename))
+  const dirTarget = dirs.find((dir: string) =>
+    getFileFullPath(`${fullDir}/${dir}`, filename),
+  )
 
   return dirTarget ? `${fullDir}/${dirTarget}/${filename}` : undefined
 }
@@ -76,24 +79,32 @@ export default class JsxScopedVisitor extends Visitor {
         this.hash = hash(cssFullPath)
       } else {
         const rootDir = `${process.cwd()}/src`
-        const fullPath = getFileFullPath(rootDir, cssFilename).replace(/\\/g, '/')
+        const fullPath = getFileFullPath(rootDir, cssFilename).replace(
+          /\\/g,
+          '/',
+        )
         if (fullPath) {
           this.hash = hash(fullPath)
         } else {
-          console.log(`未找到${this.resourcePath}文件中导入的${cssFilename}文件，无法生成css scope`)
+          // biome-ignore lint/suspicious/noConsoleLog: <explanation>
+          console.log(
+            `未找到${this.resourcePath}文件中导入的${cssFilename}文件，无法生成css scope`,
+          )
         }
       }
     }
   }
   visitJSXOpeningElement(n: JSXOpeningElement): JSXOpeningElement {
-    n.attributes = this.setScopeAttribute(n.attributes) as JSXAttributeOrSpread[]
+    n.attributes = this.setScopeAttribute(
+      n.attributes,
+    ) as JSXAttributeOrSpread[]
     return n
   }
   /**
    * 设置data-scope-*
    */
   setScopeAttribute(
-    attributes: JSXAttributeOrSpread[] | undefined
+    attributes: JSXAttributeOrSpread[] | undefined,
   ): JSXAttributeOrSpread[] | undefined {
     if (attributes && this.hash) {
       let lastAttr: JSXAttribute | null = null

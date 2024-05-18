@@ -31,6 +31,6 @@
   },
   "dependencies": {
     "@renzp/postcss-css-scoped": "workspace:*",
-    "postcss": "^8.4.29"
+    "postcss": "^8.4.38"
   }
 }

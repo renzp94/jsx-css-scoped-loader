@@ -30,6 +30,6 @@
     "registry": "https://registry.npmjs.org"
   },
   "dependencies": {
-    "postcss-selector-parser": "^6.0.13"
+    "postcss-selector-parser": "^6.0.16"
   }
 }

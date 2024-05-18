@@ -1,6 +1,6 @@
+import hash from 'hash-sum'
 import type { AttributeOptions, Selector } from 'postcss-selector-parser'
 import selectorParser from 'postcss-selector-parser'
-import hash from 'hash-sum'
 
 const plugin = (resourcePath: string) => {
   return {
@@ -32,7 +32,7 @@ const plugin = (resourcePath: string) => {
                 node,
                 selectorParser.attribute({
                   attribute: `data-scoped-${id}`,
-                } as AttributeOptions)
+                } as AttributeOptions),
               )
             } else {
               selector.first.spaces.before = ''

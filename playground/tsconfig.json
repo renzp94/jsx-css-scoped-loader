@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "lib": ["DOM",  "ESNext"],
+    "lib": ["DOM", "ESNext"],
     "allowJs": false,
     "skipLibCheck": false,
     "allowSyntheticDefaultImports": true,
@@ -14,5 +14,6 @@
     "esModuleInterop": false,
     "noImplicitAny": true,
     "jsx": "react",
-  },
+    "allowImportingTsExtensions": true
+  }
 }
