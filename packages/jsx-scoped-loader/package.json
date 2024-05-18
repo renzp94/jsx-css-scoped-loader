@@ -1,6 +1,6 @@
 {
   "name": "@renzp/jsx-scoped-loader",
-  "version": "0.0.23",
+  "version": "0.0.24",
   "description": "实现jsx scoped的webpack loader",
   "main": "lib/index.js",
   "scripts": {
