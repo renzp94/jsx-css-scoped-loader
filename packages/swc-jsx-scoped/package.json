@@ -1,6 +1,6 @@
 {
   "name": "@renzp/swc-jsx-scoped",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "实现jsx scoped的swc plugin",
   "main": "lib/index.js",
   "scripts": {
